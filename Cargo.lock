@@ -54,7 +54,7 @@ dependencies = [
 
 [[package]]
 name = "audit-core"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "serde",
  "serde_json",
@@ -193,6 +193,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "gl-outlier-engine"
+version = "0.1.1"
+dependencies = [
+ "audit-core",
+ "clap",
+ "comfy-table",
+ "csv",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "heck"
 version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -209,18 +221,6 @@ name = "itoa"
 version = "1.0.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8f42a60cbdf9a97f5d2305f08a87dc4e09308d1276d28c869c684d7777685682"
-
-[[package]]
-name = "ledger-sentinel"
-version = "0.1.0"
-dependencies = [
- "audit-core",
- "clap",
- "comfy-table",
- "csv",
- "serde",
- "serde_json",
-]
 
 [[package]]
 name = "libc"

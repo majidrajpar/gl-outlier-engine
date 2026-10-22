@@ -1,7 +1,7 @@
-# `ledger-sentinel`
+# `gl-outlier-engine`
 
-[![CI](https://github.com/majidrajpar/ledger-sentinel/actions/workflows/ci.yml/badge.svg)](https://github.com/majidrajpar/ledger-sentinel/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/majidrajpar/ledger-sentinel)](https://github.com/majidrajpar/ledger-sentinel/releases)
+[![CI](https://github.com/majidrajpar/gl-outlier-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/majidrajpar/gl-outlier-engine/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/majidrajpar/gl-outlier-engine)](https://github.com/majidrajpar/gl-outlier-engine/releases)
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](LICENSE)
 [![Rust](https://img.shields.io/badge/rust-2024%20edition-lightgrey.svg)](https://www.rust-lang.org)
 
@@ -11,7 +11,7 @@
 
 ```
 ================================================================================
-                        LEDGER-SENTINEL CONTINUOUS CONTROLS REPORT              
+                        GL-OUTLIER-ENGINE CONTINUOUS CONTROLS REPORT              
 ================================================================================
 
 --- EXECUTIVE RISK SUMMARY ---
@@ -59,8 +59,8 @@ In an enterprise processing 5,000,000 journal entries and vendor disbursements a
 ## Architectural Principles
 
 1. **100% Population Telemetry:** Replaces 20-invoice samples with continuous, algorithmic evaluation of every line item in your ERP or accounting ledger.
-2. **Zero Cloud Egress (The Privacy Mandate):** Financial ledgers, employee payroll records, and vendor disbursement registers cannot legally or ethically be uploaded to third-party cloud SaaS platforms or public AI APIs. `ledger-sentinel` is a compiled native binary that executes **100% locally on your workstation**.
-3. **Operational Noise Dampening:** Mathematical tests like Benford's Law and duplicate string matching fail in practice because naive implementations cause alert fatigue. `ledger-sentinel` introduces domain-specific eligibility gates and clustering windows that filter out routine business operations.
+2. **Zero Cloud Egress (The Privacy Mandate):** Financial ledgers, employee payroll records, and vendor disbursement registers cannot legally or ethically be uploaded to third-party cloud SaaS platforms or public AI APIs. `gl-outlier-engine` is a compiled native binary that executes **100% locally on your workstation**.
+3. **Operational Noise Dampening:** Mathematical tests like Benford's Law and duplicate string matching fail in practice because naive implementations cause alert fatigue. `gl-outlier-engine` introduces domain-specific eligibility gates and clustering windows that filter out routine business operations.
 4. **Streaming Architecture:** Employs a low-memory streaming parser capable of evaluating multi-million row ledger extracts in constant memory without heap bloat or disk spillover.
 
 ---
@@ -69,25 +69,25 @@ In an enterprise processing 5,000,000 journal entries and vendor disbursements a
 
 ### Option 1: Standalone Binary (Fastest)
 
-Download the standalone executable directly from the [GitHub Releases](https://github.com/majidrajpar/ledger-sentinel/releases) page for your operating system:
+Download the standalone executable directly from the [GitHub Releases](https://github.com/majidrajpar/gl-outlier-engine/releases) page for your operating system:
 
 #### Linux (x86_64)
 ```bash
-curl -LO https://github.com/majidrajpar/ledger-sentinel/releases/latest/download/ledger-sentinel-linux-x86_64
-chmod +x ledger-sentinel-linux-x86_64
-sudo mv ledger-sentinel-linux-x86_64 /usr/local/bin/ledger-sentinel
+curl -LO https://github.com/majidrajpar/gl-outlier-engine/releases/latest/download/gl-outlier-engine-linux-x86_64
+chmod +x gl-outlier-engine-linux-x86_64
+sudo mv gl-outlier-engine-linux-x86_64 /usr/local/bin/gl-outlier-engine
 ```
 
 #### macOS (Apple Silicon / ARM64)
 ```bash
-curl -LO https://github.com/majidrajpar/ledger-sentinel/releases/latest/download/ledger-sentinel-macos-arm64
-chmod +x ledger-sentinel-macos-arm64
-sudo mv ledger-sentinel-macos-arm64 /usr/local/bin/ledger-sentinel
+curl -LO https://github.com/majidrajpar/gl-outlier-engine/releases/latest/download/gl-outlier-engine-macos-arm64
+chmod +x gl-outlier-engine-macos-arm64
+sudo mv gl-outlier-engine-macos-arm64 /usr/local/bin/gl-outlier-engine
 ```
 
 #### Windows (x86_64)
-1. Download `ledger-sentinel-windows-x86_64.exe` from [Releases](https://github.com/majidrajpar/ledger-sentinel/releases/latest).
-2. Rename it to `ledger-sentinel.exe` and place it in your `PATH` (or run directly from PowerShell).
+1. Download `gl-outlier-engine-windows-x86_64.exe` from [Releases](https://github.com/majidrajpar/gl-outlier-engine/releases/latest).
+2. Rename it to `gl-outlier-engine.exe` and place it in your `PATH` (or run directly from PowerShell).
 
 ---
 
@@ -97,8 +97,8 @@ If you have the [Rust toolchain installed](https://rustup.rs/):
 
 ```bash
 # Clone repository
-git clone https://github.com/majidrajpar/ledger-sentinel.git
-cd ledger-sentinel
+git clone https://github.com/majidrajpar/gl-outlier-engine.git
+cd gl-outlier-engine
 
 # Build optimized release binary
 cargo build --release
@@ -109,7 +109,7 @@ cargo install --path crates/audit-cli
 
 Verify installation:
 ```bash
-ledger-sentinel --version
+gl-outlier-engine --version
 ```
 
 ---
@@ -120,7 +120,7 @@ The repository includes a synthetic test ledger (`data/sample_ledger.csv`) conta
 
 Run your first complete audit scan:
 ```bash
-ledger-sentinel scan data/sample_ledger.csv --threshold 5000
+gl-outlier-engine scan data/sample_ledger.csv --threshold 5000
 ```
 
 The terminal will render an executive risk summary, a breakdown of violations by control vector, and the top anomalies ranked by monetary exposure.
@@ -133,7 +133,7 @@ The terminal will render an executive risk summary, a breakdown of violations by
 Executes all five forensic rules across the entire dataset in a single streaming pass:
 
 ```bash
-ledger-sentinel scan <PATH_TO_CSV> [OPTIONS]
+gl-outlier-engine scan <PATH_TO_CSV> [OPTIONS]
 ```
 
 **Options:**
@@ -144,7 +144,7 @@ ledger-sentinel scan <PATH_TO_CSV> [OPTIONS]
 
 **Example:**
 ```bash
-ledger-sentinel scan general_ledger_2026.csv --threshold 10000 --limit 50
+gl-outlier-engine scan general_ledger_2026.csv --threshold 10000 --limit 50
 ```
 
 ---
@@ -153,7 +153,7 @@ ledger-sentinel scan general_ledger_2026.csv --threshold 10000 --limit 50
 Evaluates the digit distributions of your ledger amounts against standard Benford distributions:
 
 ```bash
-ledger-sentinel benford <PATH_TO_CSV> [OPTIONS]
+gl-outlier-engine benford <PATH_TO_CSV> [OPTIONS]
 ```
 
 * Computes 1st digit (1..=9) and 2nd digit (0..=9) frequencies.
@@ -165,7 +165,7 @@ ledger-sentinel benford <PATH_TO_CSV> [OPTIONS]
   * $MAD > 0.015$: Nonconforming (signals artificial manipulation)
 
 ```bash
-ledger-sentinel benford data/sample_ledger.csv
+gl-outlier-engine benford data/sample_ledger.csv
 ```
 
 ---
@@ -174,7 +174,7 @@ ledger-sentinel benford data/sample_ledger.csv
 Detects attempts to bypass procurement approval thresholds by structuring multiple invoices just beneath delegation limits:
 
 ```bash
-ledger-sentinel structuring <PATH_TO_CSV> --threshold <LIMIT> [--margin <PERCENT>]
+gl-outlier-engine structuring <PATH_TO_CSV> --threshold <LIMIT> [--margin <PERCENT>]
 ```
 
 **Options:**
@@ -183,7 +183,7 @@ ledger-sentinel structuring <PATH_TO_CSV> --threshold <LIMIT> [--margin <PERCENT
 
 **Example:**
 ```bash
-ledger-sentinel structuring data/sample_ledger.csv --threshold 5000 --margin 0.10
+gl-outlier-engine structuring data/sample_ledger.csv --threshold 5000 --margin 0.10
 ```
 
 ---
@@ -192,11 +192,11 @@ ledger-sentinel structuring data/sample_ledger.csv --threshold 5000 --margin 0.1
 Scans for unauthorized self-approved journal entries or purchase orders where the creator and approver credentials match:
 
 ```bash
-ledger-sentinel sod <PATH_TO_CSV>
+gl-outlier-engine sod <PATH_TO_CSV>
 ```
 
 ```bash
-ledger-sentinel sod data/sample_ledger.csv
+gl-outlier-engine sod data/sample_ledger.csv
 ```
 
 ---
@@ -205,25 +205,25 @@ ledger-sentinel sod data/sample_ledger.csv
 Flags duplicate payments made to the same vendor for identical amounts where invoice reference strings have minor typographical, punctuation, or formatting variations:
 
 ```bash
-ledger-sentinel duplicates <PATH_TO_CSV>
+gl-outlier-engine duplicates <PATH_TO_CSV>
 ```
 
 ```bash
-ledger-sentinel duplicates data/sample_ledger.csv
+gl-outlier-engine duplicates data/sample_ledger.csv
 ```
 
 ---
 
 ## Data Pipeline & CI/CD Integration
 
-`ledger-sentinel` is designed to function as an automated quality gate within `dbt`, Airflow, or GitHub Actions pipelines.
+`gl-outlier-engine` is designed to function as an automated quality gate within `dbt`, Airflow, or GitHub Actions pipelines.
 
 ### Automated CI Assertion
 Enforce that no unapproved journal vouchers or structured purchases exist prior to closing month-end books:
 
 ```bash
 # Return exit code 1 if Critical violations exist
-ledger-sentinel scan month_end_gl.csv --threshold 5000 --fail-on-critical
+gl-outlier-engine scan month_end_gl.csv --threshold 5000 --fail-on-critical
 ```
 
 ### JSON Processing with `jq`
@@ -231,19 +231,19 @@ Extract specific metrics or format Slack/email alerts:
 
 ```bash
 # Extract total exposure at risk
-ledger-sentinel scan month_end_gl.csv --format json | jq '.total_exposure_at_risk'
+gl-outlier-engine scan month_end_gl.csv --format json | jq '.total_exposure_at_risk'
 
 # Extract only Critical findings
-ledger-sentinel scan month_end_gl.csv --format json | jq '.findings[] | select(.severity == "Critical")'
+gl-outlier-engine scan month_end_gl.csv --format json | jq '.findings[] | select(.severity == "Critical")'
 ```
 
 ---
 
 ## Operational Noise Dampening
 
-Most forensic scripts fail in production because naive rules drown audit teams in false positives. `ledger-sentinel` embeds operational dampeners into every rule:
+Most forensic scripts fail in production because naive rules drown audit teams in false positives. `gl-outlier-engine` embeds operational dampeners into every rule:
 
-| Rule | Naive Implementation Trap | `ledger-sentinel` Noise Dampener |
+| Rule | Naive Implementation Trap | `gl-outlier-engine` Noise Dampener |
 | :--- | :--- | :--- |
 | **Benford Analysis** | Flags fixed menu prices, subscription tiers, and petty cash sets as "fraud". | **Eligibility Gate:** Enforces Nigrini criteria ($N \ge 100$, span across $\ge 3$ orders of magnitude). Bypasses fixed-rate domains with a warning rather than raising false alarms. |
 | **Split Structuring** | Flags an isolated routine purchase of $4,950 as a circumvention. | **Cluster Windowing:** Requires repeat clustering ($\ge 2$ disbursements to the same vendor) in the 90–99.9% bracket within a sliding operational window. |
@@ -255,7 +255,7 @@ Most forensic scripts fail in production because naive rules drown audit teams i
 
 ## Automatic Schema Mapping
 
-`ledger-sentinel` dynamically matches ERP column variations without requiring manual configuration:
+`gl-outlier-engine` dynamically matches ERP column variations without requiring manual configuration:
 
 * **Amount:** `amount`, `amt`, `total`, `net_amount`, `debit`, `line_amount`, `payment_amount`, `invoice_total`
 * **Identifier / Invoice Ref:** `id`, `trans_id`, `doc_num`, `voucher`, `voucher_no`, `inv_num`, `invoice_no`, `reference`
@@ -272,7 +272,7 @@ Most forensic scripts fail in production because naive rules drown audit teams i
 
 Evaluated on an Apple M3 Max / Intel i9 workstation streaming uncompressed CSV files:
 
-| Dataset Size | Metric | `ledger-sentinel` (Rust) | Python / Pandas Baseline | Speedup |
+| Dataset Size | Metric | `gl-outlier-engine` (Rust) | Python / Pandas Baseline | Speedup |
 | :--- | :--- | :--- | :--- | :--- |
 | **100,000 Rows** | Execution Time | **18 ms** | 420 ms | **23x faster** |
 | **1,000,000 Rows** | Execution Time | **140 ms** | 4.8 s | **34x faster** |

@@ -1,5 +1,5 @@
 [package]
-name = "ledger-sentinel"
+name = "gl-outlier-engine"
 version.workspace = true
 edition.workspace = true
 authors.workspace = true

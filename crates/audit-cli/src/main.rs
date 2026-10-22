@@ -10,7 +10,7 @@ use audit_core::sod::detect_sod_breaches;
 use audit_core::structuring::{detect_structuring, StructuringConfig};
 
 #[derive(Parser)]
-#[command(name = "ledger-sentinel")]
+#[command(name = "gl-outlier-engine")]
 #[command(author = "Majid Mumtaz")]
 #[command(version)]
 #[command(about = "Fast, local-first Continuous Controls Monitoring & forensic ledger audit engine", long_about = None)]
