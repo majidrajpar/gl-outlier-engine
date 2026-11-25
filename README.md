@@ -22,6 +22,14 @@
 └────────────────────┴─────────────────┴──────────┴──────┴────────┴─────┴────────────────────────┘
 ```
 
+```mermaid
+flowchart LR
+    A["ERP / GL CSV Extract"] --> B["Streaming Parser & Schema Mapper"]
+    B --> C["Deterministic Rules\nBenford · Structuring · SoD · Duplicates"]
+    C --> D["Noise Dampening & Eligibility Gates"]
+    D --> E["Risk Exposure Report\nCLI · JSON · CI Exit Codes"]
+```
+
 ---
 
 ## Table of Contents
